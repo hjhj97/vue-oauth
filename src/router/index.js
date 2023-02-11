@@ -17,6 +17,11 @@ const routes = [
 		name: 'Callback',
 		component: () => import(/* webpackChunkName: "about" */ '../views/Callback.vue'),
 	},
+	{
+		path: '/callback_github',
+		name: 'CallbackGithub',
+		component: () => import(/* webpackChunkName: "about" */ '../views/CallbackGithub.vue'),
+	},
 ];
 
 const router = createRouter({
