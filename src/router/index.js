@@ -22,6 +22,11 @@ const routes = [
 		name: 'CallbackGithub',
 		component: () => import(/* webpackChunkName: "about" */ '../views/CallbackGithub.vue'),
 	},
+	{
+		path: '/callback_naver',
+		name: 'CallbackNaver',
+		component: () => import(/* webpackChunkName: "about" */ '../views/CallbackNaver.vue'),
+	},
 ];
 
 const router = createRouter({

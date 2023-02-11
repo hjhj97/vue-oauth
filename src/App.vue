@@ -4,7 +4,8 @@
 			<router-link to="/">Home</router-link> | <router-link to="/about">About</router-link> |
 			<a :href="googleLoginUrl" v-if="!userStore.userInfo.email">Google Login</a> |
 			<router-link to="" v-if="!userStore.userInfo.email" @click="onClickGitLogin">Github Login</router-link>
-			<router-link to="" v-else @click="userStore.logout">Logout</router-link>
+			<router-link to="" v-else @click="userStore.logout">Logout</router-link> |
+			<div id="naverIdLogin">naver</div>
 		</div>
 		<div>
 			<span>{{ userStore.userInfo.email }}</span>
@@ -14,7 +15,7 @@
 </template>
 
 <script>
-	import { computed } from '@vue/runtime-core';
+	import { computed, onMounted } from '@vue/runtime-core';
 	import { useUserStore } from './stores/user';
 	export default {
 		setup() {
@@ -47,7 +48,27 @@
 				googleLoginUrl,
 				githubLoginUrl,
 				onClickGitLogin,
+				...useNaver(),
 			};
 		},
+	};
+
+	const useNaver = () => {
+		onMounted(() => {
+			const naver = window.naver;
+
+			const naverLogin = new naver.LoginWithNaverId({
+				clientId: process.env.VUE_APP_NAVER_CLIENT_ID,
+				callbackUrl: `${window.location.origin}/callback_naver`,
+				isPopup: false,
+				loginButton: {
+					color: 'green',
+					type: 3,
+					height: '60',
+				},
+			});
+
+			naverLogin.init();
+		});
 	};
 </script>
