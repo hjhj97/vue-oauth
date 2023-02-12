@@ -27,6 +27,11 @@ const routes = [
 		name: 'CallbackNaver',
 		component: () => import(/* webpackChunkName: "about" */ '../views/CallbackNaver.vue'),
 	},
+	{
+		path: '/callback_kakao',
+		name: 'CallbackKakao',
+		component: () => import(/* webpackChunkName: "about" */ '../views/CallbackKakao.vue'),
+	},
 ];
 
 const router = createRouter({

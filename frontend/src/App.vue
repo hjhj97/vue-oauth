@@ -1,10 +1,13 @@
 <template>
 	<nav style="display: flex; justify-content: space-between">
+		<!-- prettier-ignore -->
 		<div>
-			<router-link to="/">Home</router-link> | <router-link to="/about">About</router-link> |
+			<router-link to="/">Home</router-link> |
+			<router-link to="/about">About</router-link> |
 			<a :href="googleLoginUrl" v-if="!userStore.userInfo.email">Google Login</a> |
-			<router-link to="" v-if="!userStore.userInfo.email" @click="onClickGitLogin">Github Login</router-link>
-			<router-link to="" v-else @click="userStore.logout">Logout</router-link> |
+			<router-link to="" v-if="!userStore.userInfo.email" @click="onClickGitLogin">Github Login</router-link> |
+			<a :href="kakaoLoginUrl" @click="onClickKakaoLogin">Kakao Login</a> |
+			<router-link to="" @click="userStore.logout">Logout</router-link> |
 			<div id="naverIdLogin">naver</div>
 		</div>
 		<div>
@@ -38,6 +41,10 @@
 					client_id=${process.env.VUE_APP_GITHUB_CLIENT_ID}`;
 			});
 
+			const kakaoLoginUrl = computed(() => {
+				return `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.VUE_APP_KAKAO_REST_API_KEY}&redirect_uri=${window.location.origin}/callback_kakao&response_type=code`;
+			});
+
 			const onClickGitLogin = () => {
 				//window.open(githubLoginUrl.value, '_blank', 'width=800,height=600');
 				window.location.href = githubLoginUrl.value;
@@ -47,6 +54,7 @@
 				userStore,
 				googleLoginUrl,
 				githubLoginUrl,
+				kakaoLoginUrl,
 				onClickGitLogin,
 				...useNaver(),
 			};
