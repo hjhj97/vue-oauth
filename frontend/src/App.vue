@@ -42,7 +42,9 @@
 			});
 
 			const kakaoLoginUrl = computed(() => {
-				return `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.VUE_APP_KAKAO_REST_API_KEY}&redirect_uri=${window.location.origin}/callback_kakao&response_type=code`;
+				return `https://kauth.kakao.com/oauth/authorize?client_id=${
+					process.env.VUE_APP_KAKAO_REST_API_KEY
+				}&redirect_uri=${'http://localhost:3000'}/api/callback_kakao&response_type=code`;
 			});
 
 			const onClickGitLogin = () => {
